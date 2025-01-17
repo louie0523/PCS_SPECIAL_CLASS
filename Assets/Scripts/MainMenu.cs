@@ -30,6 +30,18 @@ public class MainMenu : MonoBehaviour
         SliderMusic.onValueChanged.AddListener(delegate { MusicValueChange();}); // AddListener = 앞의 조건이 활성화될떄 해당 함수를 호출한다. 이 코드는 변수의 값이 변할때이다.
         SliderSound.onValueChanged.AddListener(delegate { SoundValueCahnge();});
 
+        if(PlayerPrefs.HasKey("MusicVolume"))
+        {
+            musicVolume = PlayerPrefs.GetFloat("MusicVolume", SliderMusic.value);
+        }
+        SliderMusic.value = musicVolume;
+
+        if(PlayerPrefs.HasKey("SoundVolume"))
+        {
+            soundVolume = PlayerPrefs.GetFloat("SoundVolume", SliderSound.value);
+        }
+        SliderSound.value = soundVolume;
+
 
     }
 
@@ -51,11 +63,13 @@ public class MainMenu : MonoBehaviour
     void MusicValueChange()
     {
         Debug.Log(SliderMusic.value);
+        PlayerPrefs.SetFloat("MusicVolume", SliderMusic.value);
     }
 
     void SoundValueCahnge()
     {
         Debug.Log(SliderSound.value);
+        PlayerPrefs.SetFloat("SoundVolume", SliderSound.value);
     }
     
     public void BtnStory()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class CreateInventory : MonoBehaviour
 {
@@ -20,17 +21,21 @@ public class CreateInventory : MonoBehaviour
     GameObject inventory;
     public List <GameObject> slots = new List<GameObject> ();
     public GameObject prefabItem;
+    List<Item1> initem = new List<Item1>();
+    Item1 Exi = new Item1();
 
 
     private void Start()
     {
         SetInventory();
         inventory.SetActive(false);
-        //List<Item1> item = new List<Item1>();
-        //Item1 i = new Item1();
-        //item.Add(i);
+    }
 
-        //SetItem(item);
+    public void AddItems()
+    {
+        Debug.Log("아이템 추가");
+        initem.Add(Exi);
+        SetItem(initem);
     }
 
     private void Update()
@@ -45,6 +50,7 @@ public class CreateInventory : MonoBehaviour
                 inventory.SetActive(true );
             }
         }
+
     }
 
     void SetInventory()

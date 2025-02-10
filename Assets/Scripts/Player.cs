@@ -25,13 +25,13 @@ public class Player : MonoBehaviour
     public float BulletTime = 0f;
     bool isBullet = false;
 
-
-
+    public CreateInventory createInventory;
 
     void Start()
     {
         characterController = this.GetComponent<CharacterController>();
         animator = this.GetComponent<Animator>();
+        
     }
 
     void Update()
@@ -42,6 +42,11 @@ public class Player : MonoBehaviour
             Attack();
             Rotation();
             ItemSpeedTimer();
+        }
+
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            createInventory.AddItems();
         }
     }
 
@@ -152,11 +157,13 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Hp_Item"))
         {
             ItemPotion();
+            createInventory.AddItems();
             Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("Speed_Item"))
         {
             ItemSpeed();
+            createInventory.AddItems();
             Destroy(other.gameObject);
         }
     }
